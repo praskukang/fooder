@@ -5,9 +5,4 @@
 
 // export { Button, Input, Menumknn, Menuminn }
 
-
-
-
-
-
 export * from '../components';
