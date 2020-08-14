@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   StyleSheet,
   Text,
@@ -42,8 +42,7 @@ export class Food extends Component {
     };
   }
 
-  renderItem = ({item}) => {
-    // const onPress={() => navigation.push('Details')
+  renderItem = ({ item }) => {
     return (
       <TouchableOpacity
         onPress={() =>
@@ -54,8 +53,8 @@ export class Food extends Component {
         }>
         <LinearGradient
           colors={['#337091', '#338dbd', '#2eb6ff']}
-          start={{x: 0, y: 1}}
-          end={{x: 1, y: 0}}
+          start={{ x: 0, y: 1 }}
+          end={{ x: 1, y: 0 }}
           style={styles.item}>
           <View style={styles.image_container}>
             <Image />
@@ -74,7 +73,7 @@ export class Food extends Component {
   };
 
   ItemSeparatorComponent = () => {
-    return <View style={{height: 10}} />;
+    return <View style={{ height: 10 }} />;
   };
 
   render() {

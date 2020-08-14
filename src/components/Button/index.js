@@ -20,14 +20,16 @@ const style = StyleSheet.create({
         justifyContent: 'center'
     },
     btn: {
-        marginTop: 30,
+        // marginTop: 30,
+        top: 30,
         height: 40,
         width: 200,
         borderWidth: 1,
         borderColor: '#337091',
         borderRadius: 25,
         backgroundColor: '#337091',
-        justifyContent: 'center'
+        justifyContent: 'center',
+
 
     }
 })

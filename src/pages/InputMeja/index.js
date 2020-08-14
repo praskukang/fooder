@@ -53,7 +53,7 @@ const style = StyleSheet.create({
         fontSize: 20,
         color: 'black',
         fontWeight: 'normal',
-        marginTop: 110
+        marginTop: 110,
     },
     icon: {
         width: 200,

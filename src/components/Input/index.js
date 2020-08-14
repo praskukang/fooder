@@ -18,7 +18,7 @@ export default Input
 
 const style = StyleSheet.create({
     textinput: {
-        marginTop: 70,
+        marginTop: 40,
         height: 40,
         width: 200,
         borderWidth: 1,

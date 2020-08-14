@@ -1,6 +1,6 @@
 import React from 'react';
-import {StyleSheet, Text, View, Image} from 'react-native';
-import {Cart} from '../../assets';
+import { StyleSheet, Text, View, Image } from 'react-native';
+import { Cart } from '../../assets';
 
 const ShopCart = () => {
   return (
@@ -20,6 +20,7 @@ export default ShopCart;
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
+    justifyContent: 'space-between'
   },
   text: {
     fontWeight: 'bold',
