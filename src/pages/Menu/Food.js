@@ -8,49 +8,38 @@ import {
   TextInput,
   FlatList,
   TouchableOpacity,
+  Button,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import firestore from '@react-native-firebase/firestore';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { useNavigation } from '@react-navigation/native';
 
-const data = [
-  {
-    name: 'Mie Ayam',
-    price: 'Rp. 15.000',
-  },
-  {
-    name: 'Bakso',
-    price: 'Rp. 15.000',
-  },
-  {
-    name: 'Nasi Goreng',
-    price: 'Rp. 15.000',
-  },
-  {
-    name: 'Beef',
-    price: 'Rp. 15.000',
-  },
-  {
-    name: 'Salad dressing',
-    price: 'Rp. 15.000',
-  },
-];
 
 export class Food extends Component {
-  constructor(props) {
+  
+  constructor(props){
     super(props);
     this.state = {
-      data: data,
+      data : []
     };
   }
 
-  renderItem = ({ item }) => {
+  componentDidMount(){
+    this.getDataMakanan();
+  }
+
+  getDataMakanan = async () => {
+    const users = await firestore().collection('food').get();
+    const allData = users.docs.map((doc) => doc.data());
+    this.setState({data: allData});
+    console.log(allData);
+  }
+
+  renderItem = ({ item, navigation }) => {
     return (
-      <TouchableOpacity
-        onPress={() =>
-          this.props.props.navigation.navigate('Details', {
-            price: item.price,
-            name: item.name,
-          })
-        }>
+      <TouchableOpacity onPress={() => navigation.push('Details')} >
         <LinearGradient
           colors={['#337091', '#338dbd', '#2eb6ff']}
           start={{ x: 0, y: 1 }}
@@ -68,7 +57,7 @@ export class Food extends Component {
             </View>
           </View>
         </LinearGradient>
-      </TouchableOpacity>
+      </TouchableOpacity>     
     );
   };
 
@@ -89,6 +78,7 @@ export class Food extends Component {
           />
         </View>
       </View>
+
     );
   }
 }

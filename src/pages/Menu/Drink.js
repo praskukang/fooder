@@ -1,117 +1,29 @@
 import React, { Component } from 'react'
 import { StyleSheet, Text, View, SafeAreaView, Image, TextInput, FlatList } from 'react-native'
 import LinearGradient from "react-native-linear-gradient";
-
-const data = [
-    {
-        name: 'Stewed Mushrooms',
-
-        price: "Rp. 15.000"
-    },
-    {
-        name: 'Jackfruit Fried',
-
-        price: "Rp. 15.000"
-    },
-    {
-        name: 'Noodles',
-
-        price: "Rp. 15.000"
-    },
-    {
-        name: 'Beef',
-
-        price: "Rp. 15.000"
-    },
-    {
-        name: 'Salad dressing',
-
-        price: "Rp. 15.000"
-    },
-    {
-        name: 'Salad dressing',
-
-        price: "Rp. 15.000"
-    },
-    {
-        name: 'Salad dressing',
-
-        price: "Rp. 15.000"
-    },
-    {
-        name: 'Salad dressing',
-
-        price: "Rp. 15.000"
-    },
-    {
-        name: 'Salad dressing',
-
-        price: "Rp. 15.000"
-    },
-    {
-        name: 'Salad dressing',
-
-        price: "Rp. 15.000"
-    },
-    {
-        name: 'Salad dressing',
-
-        price: "Rp. 15.000"
-    },
-    {
-        name: 'Salad dressing',
-
-        price: "Rp. 15.000"
-    },
-    {
-        name: 'Salad dressing',
-
-        price: "Rp. 15.000"
-    },
-    {
-        name: 'Salad dressing',
-
-        price: "Rp. 15.000"
-    },
-    {
-        name: 'Salad dressing',
-
-        price: "Rp. 15.000"
-    },
-    {
-        name: 'Salad dressing',
-
-        price: "Rp. 15.000"
-    },
-    {
-        name: 'Salad dressing',
-
-        price: "Rp. 15.000"
-    },
-    {
-        name: 'Salad dressing',
-
-        price: "Rp. 15.000"
-    },
-    {
-        name: 'Salad dressing',
-
-        price: "Rp. 15.000"
-    }, {
-        name: 'Salad dressing',
-
-        price: "Rp. 15.000"
-    },
-
-];
+import firestore from '@react-native-firebase/firestore';
 
 export default class Drink extends Component {
-    constructor(props) {
+    
+    constructor(props){
         super(props);
         this.state = {
-            data: data,
-        }
-    }
+          data : []
+        };
+      }
+    
+      componentDidMount(){
+        this.getDataMinuman();
+      }
+    
+      getDataMinuman = async () => {
+        const users = await firestore().collection('drink').get();
+        const allData = users.docs.map((doc) => doc.data());
+        this.setState({data: allData});
+        console.log(allData);
+      }
+
+
     renderItem = ({ item }) => {
         return (
             <LinearGradient
