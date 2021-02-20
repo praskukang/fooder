@@ -1,16 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {StyleSheet, Text, View, Dimensions} from 'react-native';
-import ScrollableTabView, {
-  DefaultTabBar,
-} from 'react-native-scrollable-tab-view';
+import ScrollableTabView, {DefaultTabBar} from 'react-native-scrollable-tab-view';
 import Food from '../Menu/Food';
 import Drink from '../Menu/Drink';
 import ShopCart from '../../components/ShopCart';
 
 const Tabbar = () => {
+  const [totalOrder, setTotalOrder] = useState(0);
+
+
   return (
     <View style={styles.container}>
-      <ShopCart />
+      <ShopCart quantity={totalOrder}/>
       <View style={styles.tabbar}>
         <ScrollableTabView
           initialPage={0}
@@ -22,7 +23,7 @@ const Tabbar = () => {
               }}
             />
           )}>
-          <Food tabLabel="Food" />
+          <Food tabLabel="Food" onButtonPress={() => setTotalOrder(totalOrder + 1) }/>
           <Drink tabLabel="Drink" />
         </ScrollableTabView>
       </View>

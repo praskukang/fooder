@@ -17,7 +17,7 @@ export default class Drink extends Component {
       }
     
       getDataMinuman = async () => {
-        const users = await firestore().collection('drink').get();
+        const users = await firestore().collection('Drinks').get();
         const allData = users.docs.map((doc) => doc.data());
         this.setState({data: allData});
         console.log(allData);
@@ -31,7 +31,7 @@ export default class Drink extends Component {
                 start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }}
                 style={styles.item}        >
                 <View style={styles.image_container}>
-                    <Image />
+                <Image style={styles.image} source={{uri:'https://placeimg.com/100/100/tech'}}/>
                 </View>
                 <View style={styles.content}>
                     <Text style={styles.name}>{item.name}</Text>

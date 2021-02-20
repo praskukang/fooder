@@ -8,17 +8,18 @@ import {
   TextInput,
   FlatList,
   TouchableOpacity,
-  Button,
+  
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import firestore from '@react-native-firebase/firestore';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
+import Button from '../../components/Button'
 
 
 export class Food extends Component {
-  
+
   constructor(props){
     super(props);
     this.state = {
@@ -31,22 +32,26 @@ export class Food extends Component {
   }
 
   getDataMakanan = async () => {
-    const users = await firestore().collection('food').get();
+    const users = await firestore().collection('Foods').get();
     const allData = users.docs.map((doc) => doc.data());
     this.setState({data: allData});
     console.log(allData);
   }
 
-  renderItem = ({ item, navigation }) => {
+//   handleTouchItem = ({item, navigation) => {
+//     navigation.navigate('Details', item);
+// }
+
+  renderItem = ({ item }) => {
     return (
-      <TouchableOpacity onPress={() => navigation.push('Details')} >
+      
         <LinearGradient
           colors={['#337091', '#338dbd', '#2eb6ff']}
           start={{ x: 0, y: 1 }}
           end={{ x: 1, y: 0 }}
           style={styles.item}>
           <View style={styles.image_container}>
-            <Image />
+            <Image style={styles.image} source={{uri:'https://placeimg.com/100/100/nature'}}/>
           </View>
           <View style={styles.content}>
             <Text style={styles.name}>{item.name}</Text>
@@ -56,8 +61,13 @@ export class Food extends Component {
               </View>
             </View>
           </View>
-        </LinearGradient>
-      </TouchableOpacity>     
+          <View>
+            {/* <TouchableOpacity onPress={props.onButtonPress}>
+            <Text style={styles.tambah}>+</Text>
+            </TouchableOpacity> */}
+            {/* <Button/> */}
+          </View>
+        </LinearGradient>    
     );
   };
 
@@ -70,6 +80,7 @@ export class Food extends Component {
       <View style={styles.container}>
         <View style={styles.flatList}>
           <FlatList
+            
             data={this.state.data}
             renderItem={this.renderItem}
             keyExtractor={(item, index) => index.toString()}
@@ -90,6 +101,15 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
     paddingBottom: 5,
+  },
+  tambah: {
+    fontSize: 20,
+    width : 30,
+    height : 30,
+    borderWidth : 1,
+    borderRadius : 30 / 2,
+    position : 'relative',
+
   },
   flatList: {
     flex: 1,
