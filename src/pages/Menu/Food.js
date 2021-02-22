@@ -32,8 +32,8 @@ export class Food extends Component {
   }
 
   getDataMakanan = async () => {
-    const users = await firestore().collection('Foods').get();
-    const allData = users.docs.map((doc) => doc.data());
+    const makanan = await firestore().collection('Foods').get();
+    const allData = makanan.docs.map((doc) => doc.data());
     this.setState({data: allData});
     console.log(allData);
   }
@@ -79,8 +79,7 @@ export class Food extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.flatList}>
-          <FlatList
-            
+          <FlatList            
             data={this.state.data}
             renderItem={this.renderItem}
             keyExtractor={(item, index) => index.toString()}
@@ -89,7 +88,6 @@ export class Food extends Component {
           />
         </View>
       </View>
-
     );
   }
 }
