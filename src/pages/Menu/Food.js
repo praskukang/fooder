@@ -8,14 +8,15 @@ import {
   TextInput,
   FlatList,
   TouchableOpacity,
+  Alert 
   
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import firestore from '@react-native-firebase/firestore';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { useNavigation } from '@react-navigation/native';
-import Button from '../../components/Button'
+// import { NavigationContainer } from '@react-navigation/native';
+// import { createStackNavigator } from '@react-navigation/stack';
+// import { useNavigation } from '@react-navigation/native';
+// import Button from '../../components/Button'
 
 
 export class Food extends Component {
@@ -37,12 +38,21 @@ export class Food extends Component {
     this.setState({data: allData});
     console.log(allData);
   }
+  
 
-//   handleTouchItem = ({item, navigation) => {
-//     navigation.navigate('Details', item);
-// }
+  sendData = (name) => {
+    firestore()
+    .collection('Orders')
+    .add({
+        name: name,
+    })
+    .then(() => {
+        console.log(name);
+    });
+}
 
   renderItem = ({ item }) => {
+    
     return (
       
         <LinearGradient
@@ -53,20 +63,19 @@ export class Food extends Component {
           <View style={styles.image_container}>
             <Image style={styles.image} source={{uri:'https://placeimg.com/100/100/nature'}}/>
           </View>
-          <View style={styles.content}>
-            <Text style={styles.name}>{item.name}</Text>
-            <View style={styles.price_container}>
-              <View style={styles.price}>
-                <Text style={styles.textPrice}>{item.price}</Text>
+            <View style={styles.content}>
+              <Text style={styles.name}>{item.name}</Text>
+              <View style={styles.price_container}>
+                <View style={styles.price}>
+                  <Text style={styles.textPrice}>{item.price}</Text>
+                </View>
               </View>
             </View>
-          </View>
-          <View>
-            {/* <TouchableOpacity onPress={props.onButtonPress}>
-            <Text style={styles.tambah}>+</Text>
-            </TouchableOpacity> */}
-            {/* <Button/> */}
-          </View>
+         
+         <TouchableOpacity onPress={() => Alert.alert('Anda Telah Pesan', item.name)} onPressIn={() => this.sendData(item.name)}>
+            <Text>PESAN</Text>
+         </TouchableOpacity>
+
         </LinearGradient>    
     );
   };
@@ -99,6 +108,14 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
     paddingBottom: 5,
+  },
+  item: {
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+  title: {
+    fontSize: 32,
   },
   tambah: {
     fontSize: 20,
